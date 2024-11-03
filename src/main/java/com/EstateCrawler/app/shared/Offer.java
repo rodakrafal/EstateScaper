@@ -1,16 +1,16 @@
 package com.EstateCrawler.app.shared;
 
-public enum Offer {
-    SALE("sprzedaz"),
-    RENT("wynajem");
+import com.EstateCrawler.app.generics.EnumConvertible;
+import lombok.Getter;
 
-    private final String value;
+@Getter
+public enum Offer implements EnumConvertible<String> {
+  SALE("sprzedaz"),
+  RENT("wynajem");
 
-    Offer(String value) {
-        this.value = value;
-    }
+  private final String value;
 
-    public String getValue() {
-        return value;
-    }
+  Offer(String value) {
+    this.value = value;
+  }
 }

@@ -1,9 +1,10 @@
 package com.EstateCrawler.app.shared;
 
+import com.EstateCrawler.app.generics.EnumConvertible;
 import lombok.Getter;
 
 @Getter
-public enum Floor {
+public enum Floor implements EnumConvertible<String> {
   CELLAR("Suterena"),
   GROUND("Parter"),
   FIRST("1"),
@@ -20,9 +21,9 @@ public enum Floor {
   GARRET("Poddasze"),
   UNKNOWN("brak");
 
-  private final String floor;
+  private final String value;
 
-  Floor(String floor) {
-    this.floor = floor;
+  Floor(String value) {
+    this.value = value;
   }
 }

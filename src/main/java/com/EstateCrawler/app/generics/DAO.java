@@ -1,4 +1,4 @@
-package com.EstateCrawler.app.estates;
+package com.EstateCrawler.app.generics;
 
 import java.sql.SQLException;
 import java.util.List;
