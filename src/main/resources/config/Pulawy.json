@@ -1,0 +1,11 @@
+{
+  "name": "Pulawy Profile",
+  "offer": "SALE",
+  "property": "FLAT",
+  "location": {
+    "province": "lubelskie",
+    "city": "pulawy",
+    "street": "pulawy",
+    "streetNumber": "pulawy"
+  }
+}

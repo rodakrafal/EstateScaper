@@ -1,0 +1,11 @@
+{
+  "name": "Wroclaw Profile",
+  "offer": "SALE",
+  "property": "FLAT",
+  "location": {
+    "province": "dolnośląskie",
+    "city": "wroclaw",
+    "street": "wroclaw",
+    "streetNumber": "warszawa"
+  }
+}

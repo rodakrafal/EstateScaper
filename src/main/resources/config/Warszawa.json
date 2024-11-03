@@ -1,0 +1,11 @@
+{
+  "name": "Warszawa Profile",
+  "offer": "SALE",
+  "property": "FLAT",
+  "location": {
+    "province": "mazowieckie",
+    "city": "warszawa",
+    "street": "warszawa",
+    "streetNumber": "warszawa"
+  }
+}
