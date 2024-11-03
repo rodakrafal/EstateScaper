@@ -1,24 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-  "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <!--        Database connection settings-->
-    <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
-    <property name="hibernate.connection.url">jdbc:sqlite:estates.db</property>
+    <!-- Database connection settings -->
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+    <!-- Echo all executed SQL to console -->
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.highlight_sql">true</property>
+
+    <!-- Automatically export the schema -->
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <!--        JDBC connection pool settings-->
-    <property name="hibernate.format_sql">true</property>
+    <!-- SQL optimized for PostgreSQL -->
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-    <!--        SQL dialect-->
-    <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
-
-    <!--        Echo all executed SQL to stdout-->
-    <property name="show_sql">true</property>
-
-    <!--        Mapping files-->
-    <mapping resource="com.EstateCrawler.app.estates.Estate"/>
+    <mapping class="com.EstateCrawler.app.estates.EstateDTO"/>
   </session-factory>
 </hibernate-configuration>

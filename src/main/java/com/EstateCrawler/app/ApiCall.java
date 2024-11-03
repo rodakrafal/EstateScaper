@@ -1,6 +1,8 @@
 package com.EstateCrawler.app;
 
 import com.EstateCrawler.app.estates.Estate;
+import com.EstateCrawler.app.estates.EstateManager;
+import com.EstateCrawler.app.database.DataBase;
 import com.EstateCrawler.app.profiles.AvailableProfiles;
 import com.EstateCrawler.app.profiles.Profile;
 import com.EstateCrawler.app.profiles.ProfileLoader;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,6 +30,7 @@ public class ApiCall {
     String uniqueId = System.getenv("OTODOM_UNIQUE_ID");
     int currentPage = 1;
     int maxPages = 1;
+    EstateManager estateManager = new EstateManager();
 
     try {
       Profile profile = ProfileLoader.loadProfile(AvailableProfiles.WARSAW.getProfileName());
@@ -62,11 +66,11 @@ public class ApiCall {
           }
 
           JsonNode searchAdsItems = rootNode.path("data").path("searchAds").path("items");
-          searchAdsItems.forEach(
-              item -> {
-                Estate estate = createEstate(item);
-                System.out.println(estate);
-              });
+          saveData(searchAdsItems, estateManager);
+
+          JsonNode searchAdsPromotedItems =
+              rootNode.path("data").path("searchAdsRandomPromoted").path("items");
+          saveData(searchAdsPromotedItems, estateManager);
 
           currentPage++;
         } else {
@@ -76,7 +80,22 @@ public class ApiCall {
 
     } catch (IOException e) {
       System.out.println("Error: " + e.getMessage());
+    } finally {
+      DataBase.shutdown();
     }
+  }
+
+  private static void saveData(JsonNode itemNode, EstateManager estateManager) {
+    itemNode.forEach(
+        item -> {
+          Estate estate = createEstate(item);
+          try {
+            estateManager.insertOrUpdate(estate.toDTO());
+          } catch (SQLException e) {
+            throw new RuntimeException(e);
+          }
+          System.out.println(estate);
+        });
   }
 
   private static Estate createEstate(JsonNode item) {

@@ -1,21 +1,32 @@
 package com.EstateCrawler.app.shared;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor(staticName = "of")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
 @Embeddable
 public class Location {
 
+  @Column(nullable = false)
   String province;
+
+  @Column(nullable = false)
   String city;
+
+  @Column(nullable = false)
   String street;
+
   String streetNumber;
+
+  @Column(nullable = false)
   String district;
+
+  @Column(nullable = false)
   String neighborhood;
 
   private String getOrEmpty(String value) {

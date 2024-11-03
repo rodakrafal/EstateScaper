@@ -8,11 +8,9 @@ public interface DAO<T> {
 
   List<T> getAll() throws SQLException;
 
-  String save(T t) throws SQLException;
+  void insert(T t) throws SQLException;
 
-  String insert(T t) throws SQLException;
+  void update(T t) throws SQLException;
 
-  String update(T t) throws SQLException;
-
-  String delete(String id) throws SQLException;
+  void delete(String id) throws SQLException;
 }
